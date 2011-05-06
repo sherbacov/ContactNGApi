@@ -186,6 +186,7 @@ namespace ContactApi
     public class Fees
     {
         public decimal Rate;
+        public decimal FeesPart;
         public decimal FeesClient;
         public decimal FeesClientLocal;
         public string  FeesClientCurr;  
@@ -205,7 +206,16 @@ namespace ContactApi
         New = 100,
         Payed = 0,
         Send = 3, 
-        ReadyToPay = 101
+        ReadyToPay = 101,
+        /// <summary>
+        ///  Готов к выплате
+        /// </summary>
+        ReadyToPayOut = 5,
+        /// <summary>
+        ///  Выплачено
+        /// </summary>
+        PayOut = 5
+
     }
 
     public enum ContactTransferDirection
@@ -231,6 +241,26 @@ namespace ContactApi
 
         public ContactPerson Sender = new ContactPerson();
         public ContactPerson Resiver = new ContactPerson();
+
+
+        public string GetShortFullName(ContactPerson person)
+        {
+            var fullname = "";
+
+            if (person.Name != null)
+            {
+                fullname = person.Name.ToLower();
+                fullname = fullname[0].ToString().ToUpper() + fullname.Substring(1).ToLower();
+            }
+
+            if (person.LastName != null)
+                fullname += " "  + person.LastName.ToUpper().Substring(0, 1) + ".";
+
+            if (person.SurName != null)
+                fullname += person.SurName.ToUpper().Substring(0, 1) + ".";
+
+            return fullname;
+        }
     }
 
 
