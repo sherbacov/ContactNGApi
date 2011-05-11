@@ -57,14 +57,10 @@ namespace ContactApi
         public string REQUEST_ID;
         public string REQUEST_STEP;
 
-        public Request()
-        {
-        }
+        public Request(){}
 
         protected Request(SerializationInfo info, StreamingContext context)
         {
-            
-            
             //n1 = info.GetInt32("i");
             //n2 = info.GetInt32("j");
             //str = info.GetString("k");
