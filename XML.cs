@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -10,10 +7,8 @@ namespace ContactApi
 {
     public static class ContactXml
     {
-
         public static string Serialize (object value)
         {
-
             var result = new StringBuilder();
             using (var stringWriter = new StringWriter(result))
             {
@@ -33,11 +28,5 @@ namespace ContactApi
 
             return result.ToString();
         }
-
-
     }
-
-
-
-
 }
