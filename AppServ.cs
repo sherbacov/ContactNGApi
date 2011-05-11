@@ -126,9 +126,9 @@ namespace ContactApi
     public class PersonAddress
     {
         /// <summary>
-        /// Код региона
+        /// Региона
         /// </summary>
-        public int Region;
+        public string Region;
         /// <summary>
         ///  Адрес клиента
         /// </summary>
@@ -189,7 +189,11 @@ namespace ContactApi
         public decimal FeesPart;
         public decimal FeesClient;
         public decimal FeesClientLocal;
-        public string  FeesClientCurr;  
+        public string  FeesClientCurr;
+        /// <summary>
+        /// Сумма получения из КЦ
+        /// </summary>
+        public decimal FeesPartRet;
     }
 
     /// <summary>

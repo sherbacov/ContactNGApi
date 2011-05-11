@@ -119,7 +119,11 @@ namespace ContactApi
                 NewTransfer(this, e);
         }
 
-
+        /// <summary>
+        /// Процедура заполнения беревода без открытия счета
+        /// </summary>
+        /// <param name="transfer">Перевод</param>
+        /// <param name="xmlRecord">XML запрос</param>
         private void FillTransfer(ContactTransfer transfer, XmlNode xmlRecord)
         {
             FillSection("trn", ref transfer, xmlRecord);
@@ -131,7 +135,6 @@ namespace ContactApi
             FillSectionAddress("b", ref transfer.Resiver.Address, xmlRecord);
             FillSectionIds("b", ref transfer.Resiver.Id, xmlRecord);
         }
-
 
         public ContactResponse GetResponse(XmlNode requestXml, bool childNode = true)
         {
