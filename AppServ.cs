@@ -201,7 +201,13 @@ namespace ContactApi
     /// </summary>
     public class Transfer
     {
+        /// <summary>
+        /// Дата перевода
+        /// </summary>
         public DateTime Date;
+        /// <summary>
+        /// Номер перевода
+        /// </summary>
         public string Reference;
     }
 
@@ -224,7 +230,13 @@ namespace ContactApi
 
     public enum ContactTransferDirection
     {
+        /// <summary>
+        /// Входящий перевод
+        /// </summary>
         Incoming,
+        /// <summary>
+        /// Исходящий перевод
+        /// </summary>
         Outgoing
     }
 
@@ -233,20 +245,48 @@ namespace ContactApi
     {
         public ContactTransferDirection Direction;
         
+        /// <summary>
+        /// Сумма перевода
+        /// </summary>
         public decimal Amount;
+        /// <summary>
+        /// Валюта перевода. Пример RUR - рубли
+        /// </summary>
         public string Currency;
 
+        /// <summary>
+        /// Код точки отправления
+        /// </summary>
         public string SendPoint;
+        /// <summary>
+        /// Код точки получения
+        /// </summary>
         public string PickupPoint;
 
+        /// <summary>
+        /// Статус перевода
+        /// </summary>
         public ContactTransferStatus Status;
 
+        /// <summary>
+        /// Комиссии с перевода
+        /// </summary>
         public Fees Fee = new Fees();
-
+        /// <summary>
+        /// Отправитель перевода
+        /// </summary>
         public ContactPerson Sender = new ContactPerson();
+
+        /// <summary>
+        /// Получатель перевода
+        /// </summary>
         public ContactPerson Resiver = new ContactPerson();
 
-
+        /// <summary>
+        /// Получение из person ФИО клиента вида: Иванов И.И. или Иванов И. (нет отч.) или Иванов (только фамилия)
+        /// </summary>
+        /// <param name="person">Отправитель или Получатель ContactPerson</param>
+        /// <returns>ФИЮ. Пример Иванов И.И.</returns>
         public string GetShortFullName(ContactPerson person)
         {
             var fullname = "";
@@ -267,11 +307,4 @@ namespace ContactApi
         }
     }
 
-
-    [XmlRoot("TMoneyOrderObject")]
-    public class MoneyOrderObject
-    {
-        
-
-    }
 }
