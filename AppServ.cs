@@ -251,6 +251,11 @@ namespace ContactApi
         public string Currency;
 
         /// <summary>
+        /// Вид услуги. 2 - перевод без открытия счета
+        /// </summary>
+        public int Service;
+
+        /// <summary>
         /// Код точки отправления
         /// </summary>
         public string SendPoint;
