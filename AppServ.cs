@@ -183,6 +183,9 @@ namespace ContactApi
     {
         public decimal Rate;
         public decimal FeesPart;
+        /// <summary>
+        /// Комиссия с клиента
+        /// </summary>
         public decimal FeesClient;
         public decimal FeesClientLocal;
         public string  FeesClientCurr;
