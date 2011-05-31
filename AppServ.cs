@@ -27,44 +27,74 @@ namespace ContactApi
     {
         public string DOC_ID;
         
+        [XmlAttribute]
         public string ACTION;
 
+        [XmlAttribute]
         public string OBJECT_CLASS;
 
+        [XmlIgnore]
         public string Intergation;
 
+        [XmlIgnore]
         public int RETURN_TRN_DATA;
 
+        [XmlIgnore]
         public int NOEXCEPTION;
 
+        [XmlIgnore]
         public int OFAC_SENDER;
 
+        [XmlIgnore]
         public int OFAC_REC;
 
+        [XmlAttribute]
         public string INT_SOFT_ID;
 
+        [XmlAttribute]
         public string POINT_CODE;
 
+        [XmlIgnore]
         public int USER_ID;
-        
-        public string USER_LOGIN;
 
+        [XmlIgnore]
+        public string USER_LOGIN;
+        
+        [XmlIgnore]
         public string LANG;
 
+        [XmlIgnore]
         public string CLIENT_IP;
+        
+        [XmlIgnore]
         public string SERVER_IP;
+        
+        [XmlIgnore]
         public string REMOTE_CLIENT_IP;
+        
+        [XmlIgnore]
         public string REQUEST_ID;
+        
+        [XmlIgnore]
         public string REQUEST_STEP;
+
+        [XmlAttribute]
+        public string TYPE_VERSION;
+        
+        [XmlAttribute]
+        public int VERSION;
+
+        [XmlAttribute]
+        public string ExpectSigned = "Yes";
 
         public Request(){}
 
-        protected Request(SerializationInfo info, StreamingContext context)
-        {
+        //protected Request(SerializationInfo info, StreamingContext context)
+        //{
             //n1 = info.GetInt32("i");
             //n2 = info.GetInt32("j");
             //str = info.GetString("k");
-        }
+        //}
 
     }
 

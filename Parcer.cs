@@ -88,7 +88,6 @@ namespace ContactApi
                             var xmlRecord = nodeList[0];
                             var responseTransfer = GetResponse(xmlRecord, false);
 
-
                             if (!Requests.ContainsKey(response.REQUEST_ID))
                                 return new Response { ReturnCode = 60, ErrorText = "Пришел ответ, но запроса нет в Базе. Код: 60", ViewErrorText = "Пришел ответ, но запроса нет в Базе. Код: 60" };
 

@@ -1,0 +1,4 @@
+
+*.pdb
+obj/Debug/*
+ContactApi.5.1.ReSharper.user
