@@ -116,29 +116,6 @@ namespace ContactApi
         }
     }
 
-    
-//  <sZipCode /> 
-//  <sRegion /> 
-//  <sPhone /> 
-//  <sIDexpireDate /> 
-//  <sCountry>AZ</sCountry> 
-//  <sCity /> 
-//  <sAddress /> 
-
-
-//  <sIDtype /> 
-//  <sIDnumber /> 
-//  <sIDdate /> 
-//  <sIDwhom /> 
-//  <sCountryC>AB</sCountryC> 
-
-
- //<bIDtype>ПАСПОРТ ГР.РФ</bIDtype> 
-  //<bIDnumber>8812733302</bIDnumber> 
-  //<bIDdate>20010414</bIDdate> 
-  //<bIDwhom>МВД РФ</bIDwhom> 
-  //<bIDexpireDate>20160831</bIDexpireDate> 
-
 
     public class PersonId
     {
@@ -204,7 +181,29 @@ namespace ContactApi
 
     public class ContactPerson :  PhysicalPerson
     {
-        
+        /// <summary>
+        /// Получение из person ФИО клиента вида: Иванов И.И. или Иванов И. (нет отч.) или Иванов (только фамилия)
+        /// </summary>
+        /// <param name="person">Отправитель или Получатель ContactPerson</param>
+        /// <returns>ФИЮ. Пример Иванов И.И.</returns>
+        public string GetShortFullName()
+        {
+            var fullname = "";
+
+            if (Name != null)
+            {
+                fullname = Name.ToLower();
+                fullname = fullname[0].ToString().ToUpper() + fullname.Substring(1).ToLower();
+            }
+
+            if (LastName != null)
+                fullname += " " + LastName.ToUpper().Substring(0, 1) + ".";
+
+            if (SurName != null)
+                fullname += SurName.ToUpper().Substring(0, 1) + ".";
+
+            return fullname;
+        }
 
     }
 
@@ -213,6 +212,9 @@ namespace ContactApi
     {
         public decimal Rate;
         public decimal FeesPart;
+        /// <summary>
+        /// Комиссия с клиента
+        /// </summary>
         public decimal FeesClient;
         public decimal FeesClientLocal;
         public string  FeesClientCurr;
@@ -266,7 +268,34 @@ namespace ContactApi
         Outgoing
     }
 
+    // ReSharper disable InconsistentNaming
+    /// <summary>
+    /// Точка отправления или получения
+    /// </summary>
+    public class ContactPoint
+    {
+        public int Bank_Id;
+        public string PP_Code;
+        public string Country;
+        public string Country_Name;
+        public string Bank_Name;
+        public string Rec_Curr;
+        public string Rec_Curr_Ids;
+        public string Addr;
+        public string Phone;
+        public string Service_Name;
+        public string City_Head;
+        public int    Region;
+        public string Region_Name;
+        public string City_Bank;
+        public string Country_Bank;
+        public string Logo;
+        public int Re;
+    }
+    // ReSharper restore InconsistentNaming
 
+
+    
     public class ContactTransfer : Transfer
     {
         public ContactTransferDirection Direction;
@@ -281,6 +310,11 @@ namespace ContactApi
         public string Currency;
 
         /// <summary>
+        /// Вид услуги. 2 - перевод без открытия счета
+        /// </summary>
+        public int Service;
+
+        /// <summary>
         /// Код точки отправления
         /// </summary>
         public string SendPoint;
@@ -288,6 +322,11 @@ namespace ContactApi
         /// Код точки получения
         /// </summary>
         public string PickupPoint;
+
+        /// <summary>
+        /// Точка получения
+        /// </summary>
+        public ContactPoint Pickup = new ContactPoint();
 
         /// <summary>
         /// Статус перевода
@@ -308,29 +347,6 @@ namespace ContactApi
         /// </summary>
         public ContactPerson Resiver = new ContactPerson();
 
-        /// <summary>
-        /// Получение из person ФИО клиента вида: Иванов И.И. или Иванов И. (нет отч.) или Иванов (только фамилия)
-        /// </summary>
-        /// <param name="person">Отправитель или Получатель ContactPerson</param>
-        /// <returns>ФИЮ. Пример Иванов И.И.</returns>
-        public string GetShortFullName(ContactPerson person)
-        {
-            var fullname = "";
-
-            if (person.Name != null)
-            {
-                fullname = person.Name.ToLower();
-                fullname = fullname[0].ToString().ToUpper() + fullname.Substring(1).ToLower();
-            }
-
-            if (person.LastName != null)
-                fullname += " "  + person.LastName.ToUpper().Substring(0, 1) + ".";
-
-            if (person.SurName != null)
-                fullname += person.SurName.ToUpper().Substring(0, 1) + ".";
-
-            return fullname;
-        }
     }
 
 }

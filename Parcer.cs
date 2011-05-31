@@ -133,6 +133,7 @@ namespace ContactApi
             FillSectionPerson("b", ref transfer.Resiver, xmlRecord);
             FillSectionAddress("b", ref transfer.Resiver.Address, xmlRecord);
             FillSectionIds("b", ref transfer.Resiver.Id, xmlRecord);
+            FillSectionPoint("PICKUP_POINT_INFO", ref transfer.Pickup, xmlRecord);
         }
 
         public ContactResponse GetResponse(XmlNode requestXml, bool childNode = true)
@@ -219,6 +220,20 @@ namespace ContactApi
                 foreach (var childNode in
                     requestXml.ChildNodes.Cast<XmlNode>().Where(childNode => childNode.Name == (code + property.Name) && childNode.ChildNodes.Count > 0))
                     SetValueForProperty(property, fee, childNode.ChildNodes[0].Value);
+        }
+
+        private void FillSectionPoint(string code, ref ContactPoint point, XmlNode requestXml)
+        {
+            var nodeList = requestXml.SelectNodes(code + "/RESPONSE");
+            
+            if (nodeList == null || nodeList.Count != 1) return;
+
+            var node = nodeList[0];            
+            foreach (var property in point.GetType().GetFields())
+                if (node.Attributes != null)
+                    foreach (var attribute in
+                        node.Attributes.Cast<XmlAttribute>().Where(attribute => attribute.Name.ToUpper() == property.Name.ToUpper()))
+                        SetValueForProperty(property, point, attribute.Value);
         }
 
         public void SetValueForProperty(FieldInfo property, object obj, string value)
